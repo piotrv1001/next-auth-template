@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { registerAction } from "@/actions/register-action";
+import { toast } from "@/components/ui/use-toast";
 
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
@@ -28,7 +30,13 @@ export default function RegisterForm() {
   });
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    console.log(values);
+    startTransition(async () => {
+      const res = await registerAction(values);
+      toast({
+        variant: res.status === "error" ? "error" : "success",
+        description: res.message,
+      });
+    });
   };
 
   return (

@@ -16,8 +16,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { useRouter } from "next/navigation";
+import { loginAction } from "@/actions/login-action";
+import { toast } from "@/components/ui/use-toast";
 
 export default function LoginForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -28,7 +33,18 @@ export default function LoginForm() {
   });
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
+    startTransition(async () => {
+      const res = await loginAction(values);
+      if (res?.status === "error") {
+        toast({
+          variant: "error",
+          description: res.message,
+        });
+      }
+      else if (res?.status === "success") {
+        router.push(DEFAULT_LOGIN_REDIRECT);
+      }
+    });
   };
 
   return (
