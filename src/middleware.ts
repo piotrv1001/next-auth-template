@@ -7,7 +7,7 @@ import {
   publicRoutes,
 } from "./routes";
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "./utils/get-current-user";
+import { getCurrentUser } from "@/lib/utils";
 
 const { auth } = NextAuth(authConfig);
 
