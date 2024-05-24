@@ -99,11 +99,7 @@ export default function RegisterForm() {
           />
         </div>
         <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending ? (
-            <span>Create an account</span>
-          ) : (
-            <div className="w-4 h-4 animate-spin rounded-full border-b-2 border-foreground"></div>
-          )}
+          Create an account
         </Button>
       </form>
     </Form>

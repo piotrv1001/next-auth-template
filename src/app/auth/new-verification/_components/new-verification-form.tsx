@@ -18,6 +18,8 @@ export default function NewVerificationForm() {
   const isLoggedIn = !!user;
 
   useEffect(() => {
+    setSuccess(undefined);
+    setError(undefined);
     const verifyToken = async () => {
       if (!token) return setError("Token not found");
       const res = await newVerificationAction(token);

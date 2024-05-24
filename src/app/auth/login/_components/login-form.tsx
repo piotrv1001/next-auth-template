@@ -92,11 +92,7 @@ export default function LoginForm() {
           </Button>
         </div>
         <Button type="submit" className="w-full" disabled={isPending}>
-          {!isPending ? (
-            <span>Login</span>
-          ) : (
-            <div className="w-4 h-4 animate-spin rounded-full border-b-2 border-foreground"></div>
-          )}
+          Login
         </Button>
       </form>
     </Form>
